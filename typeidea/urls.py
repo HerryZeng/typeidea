@@ -14,13 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, re_path
+from django.urls import path, re_path, include
 
 from blog.views import (
     IndexView, CategoryView, TagView, PostDetailView, SearchView, AuthorView
 )
-from config.views import LinkListView
 from comment.views import CommentView
+from config.views import LinkListView
 from .custom_site import custom_site
 
 urlpatterns = [
@@ -35,3 +35,12 @@ urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
     path('super_admin/', custom_site.urls, name='super_admin'),
 ]
+
+from typeidea.settings import develop
+
+if develop.DEBUG:
+    import debug_toolbar
+
+    urlpatterns = [
+                      re_path(r'^__debug__/', include(debug_toolbar.urls)),
+                  ] + urlpatterns

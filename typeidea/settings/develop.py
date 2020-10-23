@@ -1,4 +1,4 @@
-from .base import *     #NOQA
+from .base import *  # NOQA
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -12,3 +12,17 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+INSTALLED_APPS += [
+    'debug_toolbar',
+]
+
+MIDDLEWARE += [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+]
+
+INTERNAL_IPS = ['127.0.0.1']
+
+DEBUG_TOOBAR_PANELS = [
+    'djdt_flamegraph.FlamegraphPanel',
+]

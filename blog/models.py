@@ -1,5 +1,6 @@
-from django.db import models
+import mistune
 from django.contrib.auth.models import User
+from django.db import models
 
 
 # Create your models here.
@@ -80,6 +81,7 @@ class Post(models.Model):
     category = models.ForeignKey(Category, verbose_name='分类', on_delete=models.CASCADE)
     tag = models.ManyToManyField(Tag, verbose_name='标签')
     created_time = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')
+    content_html = models.TextField(verbose_name='正文html代码', blank=True, editable=False)
 
     pv = models.PositiveIntegerField(default=1)
     uv = models.PositiveIntegerField(default=1)
@@ -122,3 +124,7 @@ class Post(models.Model):
     @classmethod
     def hot_posts(cls):
         return cls.objects.filter(status=cls.STATUS_NORMAL).order_by('-pv')
+
+    def save(self, *args, **kwargs):
+        self.content_html = mistune.markdown(self.content)
+        super().save(*args, **kwargs)

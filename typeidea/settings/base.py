@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'comment.apps.CommentConfig',
 ]
 
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -110,6 +112,6 @@ STATIC_URL = '/static/'
 STATIC_ROOT = '/tmp/static'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR,'typeidea','themes', THEME, 'static'),
+    os.path.join(BASE_DIR, 'typeidea', 'themes', THEME, 'static'),
 ]
 print(STATICFILES_DIRS)

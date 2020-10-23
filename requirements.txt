@@ -1,6 +1,5 @@
-asgiref==3.2.10
 Django==3.1.2
-pytz==2020.1
-sqlparse==0.4.1
 
 setuptools~=50.3.2
+mistune~=0.8.4
+django-debug-toolbar~=3.1.1
